@@ -31,13 +31,11 @@ export const ROUTES: Routes = [];
 })
 export class AppModule {}
 
-/*
-var config = {
-  apiKey: "AIzaSyCXz7GrHLBs-xlsCrr185iG4v4UrNreq2Y",
-  authDomain: "fitness-app-e668a.firebaseapp.com",
-  databaseURL: "https://fitness-app-e668a.firebaseio.com",
-  projectId: "fitness-app-e668a",
-  storageBucket: "fitness-app-e668a.appspot.com",
-  messagingSenderId: "1014564696462"
-};
-*/
+// var config = {
+//     apiKey: "AIzaSyDrw3TbFfO7MxT78bwsaCewgnDjdbCFPFY",
+//     authDomain: "angular-pro-fitness-app.firebaseapp.com",
+//     databaseURL: "https://angular-pro-fitness-app.firebaseio.com",
+//     projectId: "angular-pro-fitness-app",
+//     storageBucket: "angular-pro-fitness-app.appspot.com",
+//     messagingSenderId: "331692872288"
+//   };
