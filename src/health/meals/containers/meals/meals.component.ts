@@ -1,20 +1,36 @@
-import { MealsService } from '../../../shared/services/meals/meals.service';
-import { Component, OnInit } from '@angular/core';
+import { Store } from '../../../../store';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { Observable, Subscription } from 'rxjs/Rx';
+
+import { Meal, MealsService } from '../../../shared/services/meals/meals.service';
 
 @Component({
   selector: 'meals',
   styleUrls: ['meals.component.scss'],
   template: `
     <div>
-      Meals
+      {{ meals$ | async | json }}
     </div>
   `
 })
 
-export class MealsComponent implements OnInit {
+export class MealsComponent implements OnInit, OnDestroy {
+
+  meals$: Observable<Meal[]>;
+  subscription: Subscription;
+
   constructor(
-    private mealsService: MealsService
+    private mealsService: MealsService,
+    private store: Store
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.meals$ = this.store.select<Meal[]>('meals');
+    this.subscription = this.mealsService.meals$.subscribe();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
