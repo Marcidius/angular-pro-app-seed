@@ -1,5 +1,6 @@
-import { LoadChildren, RouterModule, Routes } from '@angular/router';
+import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../auth/shared/guards/auth.guard';
 
@@ -11,7 +12,8 @@ export const ROUTES: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(ROUTES)
+    RouterModule.forChild(ROUTES),
+    SharedModule.forRoot()
   ]
 })
 export class HealthModule { }

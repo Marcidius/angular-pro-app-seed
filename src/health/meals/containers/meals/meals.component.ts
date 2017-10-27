@@ -1,3 +1,4 @@
+import { MealsService } from '../../../shared/services/meals/meals.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,7 +12,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class MealsComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private mealsService: MealsService
+  ) { }
 
   ngOnInit() { }
 }
