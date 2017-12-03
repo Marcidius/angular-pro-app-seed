@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
+
 import { Store } from 'store';
 
 import { AuthService } from '../../../../auth/shared/services/auth/auth.service';
@@ -35,5 +39,19 @@ export class MealsService {
     return this.db.list(`meals/${this.uid}`).push(meal);
   }
 
+  updateMeal(key: string, meal: Meal) {
+    return this.db.object(`meals/${this.uid}/${key}`).update(meal);
+  }
 
+  removeMeal(key: string) {
+    return this.db.list(`meals/${this.uid}`).remove(key);
+  }
+
+  getMeal(key: string) {
+    if (!key) return Observable.of({});
+
+    return this.store.select<Meal[]>('meals')
+      .filter(Boolean) // stops the stream if there are no meals
+      .map((meals) => meals.find((meal: Meal) => meal.$key === key));
+  };
 }
