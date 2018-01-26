@@ -1,5 +1,3 @@
-import { WorkoutPipe } from './pipes/workout.pipe';
-import { JoinPipe } from './pipes/join.pipe';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -8,7 +6,11 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { ListItemComponent } from './components/list-item/list-item.component';
 
+import { JoinPipe } from './pipes/join.pipe';
+import { WorkoutPipe } from './pipes/workout.pipe';
+
 import { MealsService } from './services/meals/meals.service';
+import { ScheduleService } from './services/schedule/schedule.service';
 import { WorkoutsService } from './services/workouts/workouts.service';
 
 @NgModule({
@@ -34,7 +36,8 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         MealsService,
-        WorkoutsService
+        WorkoutsService,
+        ScheduleService
       ]
     }
   }
