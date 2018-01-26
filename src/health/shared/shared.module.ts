@@ -1,3 +1,5 @@
+import { WorkoutPipe } from './pipes/workout.pipe';
+import { JoinPipe } from './pipes/join.pipe';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -16,10 +18,14 @@ import { WorkoutsService } from './services/workouts/workouts.service';
     AngularFireDatabaseModule
   ],
   exports: [
-    ListItemComponent
+    ListItemComponent,
+    JoinPipe,
+    WorkoutPipe
   ],
   declarations: [
-    ListItemComponent
+    ListItemComponent,
+    JoinPipe,
+    WorkoutPipe
   ]
 })
 export class SharedModule {
