@@ -62,8 +62,6 @@ export class ScheduleCalendarComponent implements OnChanges {
   }
 
   getSection(name: string): ScheduleItem {
-    console.log('getSection: ', this.items && this.items[name] || {});
-
     return this.items && this.items[name] || {};
   }
 

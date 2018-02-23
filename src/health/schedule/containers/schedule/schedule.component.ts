@@ -24,7 +24,9 @@ import { Store } from '../../../../store';
       <schedule-assign
         *ngIf="open"
         [section]="selected$ | async"
-        [list]="list$ | async">
+        [list]="list$ | async"
+        (cancel)="closeAssign()"
+        (update)="assignItem($event)">
       </schedule-assign>
 
 
@@ -61,6 +63,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       this._scheduleService.schedule$.subscribe(),
       this._scheduleService.selected$.subscribe(),
       this._scheduleService.list$.subscribe(),
+      this._scheduleService.items$.subscribe(),
       this._mealsService.meals$.subscribe(),
       this._workoutsService.workouts$.subscribe(),
 
@@ -78,5 +81,14 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  assignItem(items: string[]) {
+    this._scheduleService.updateItems(items);
+    this.closeAssign();
+  }
+
+  closeAssign() {
+    this.open = false;
   }
 }
