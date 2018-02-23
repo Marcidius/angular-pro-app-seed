@@ -3,7 +3,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { ScheduleService } from '../../../shared/services/schedule/schedule.service';
+import { ScheduleService, ScheduleItem } from '../../../shared/services/schedule/schedule.service';
 
 import { Store } from '../../../../store';
 
@@ -13,7 +13,9 @@ import { Store } from '../../../../store';
   template: `
     <div class="schedule">
       <schedule-calendar
-        [date]="date$ | async">
+        [date]="date$ | async"
+        [items]="schedule$ | async"
+        (change)="changeDate($event)">
       </schedule-calendar>
 
 
@@ -25,6 +27,7 @@ import { Store } from '../../../../store';
 export class ScheduleComponent implements OnInit, OnDestroy {
 
   date$: Observable<Date>;
+  schedule$: Observable<ScheduleItem[]>;
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -36,11 +39,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.date$ = this.store.select('date');
-
+    this.schedule$ = this.store.select('schedule');
 
     this.subscriptions = [
       this._scheduleService.schedule$.subscribe(),
     ]
+  }
+
+  changeDate(date: Date) {
+    this._scheduleService.updateDate(date);
   }
 
   ngOnDestroy() {
