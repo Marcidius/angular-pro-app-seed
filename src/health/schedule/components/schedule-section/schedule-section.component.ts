@@ -11,7 +11,7 @@ import { ScheduleItem } from '../../../shared/services/schedule/schedule.service
         {{ name }}
       </div>
 
-      <div class="schedule-secttion__item food"
+      <div class="schedule-section__item food"
         *ngIf="section.meals; else addMeal"
         (click)="onSelect('meals', section.meals)">
         <span>{{ section.meals | join }}</span>
@@ -24,7 +24,7 @@ import { ScheduleItem } from '../../../shared/services/schedule/schedule.service
         </div>
       </ng-template>
 
-      <div class="schedule-secttion__item workout"
+      <div class="schedule-section__item workout"
         *ngIf="section.workouts; else addWorkout"
         (click)="onSelect('workouts', section.workouts)">
         <span>{{ section.meals | join }}</span>
@@ -46,7 +46,6 @@ export class ScheduleSectionComponent {
 
   @Output() select = new EventEmitter<any>();
 
-  // @Output()
   constructor() {}
 
   onSelect(type: string, assigned: string[] = []) {
